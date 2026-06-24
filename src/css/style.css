@@ -1,0 +1,206 @@
+/* Compiled CSS based on Sass Variables */
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1f2937;
+  overflow-x: hidden;
+  background-color: #ffffff;
+}
+.bg-light {
+  background-color: #f8fafc !important;
+}
+.max-w-600 {
+  max-width: 600px;
+}
+.letter-spacing {
+  letter-spacing: 1px;
+}
+.opacity-90 {
+  opacity: 0.9;
+}
+.bg-accent {
+  background-color: #f59e0b !important;
+}
+.btn-accent {
+  background-color: #f59e0b;
+  border-color: #f59e0b;
+}
+.btn-accent:hover {
+  background-color: #d98206;
+  border-color: #d98206;
+}
+.text-accent {
+  color: #f59e0b !important;
+}
+.bg-primary-light {
+  background-color: rgba(21, 128, 61, 0.1) !important;
+}
+.bg-success-light {
+  background-color: rgba(34, 197, 94, 0.1) !important;
+}
+.bg-warning-light {
+  background-color: rgba(245, 158, 11, 0.1) !important;
+}
+
+.top-bar {
+  background-color: #166534;
+}
+.top-bar a:hover {
+  opacity: 0.8;
+}
+
+.navbar .logo-wrapper {
+  width: 45px;
+  height: 45px;
+}
+.navbar .brand-title {
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  color: #15803d;
+}
+.navbar .brand-subtitle {
+  font-size: 0.72rem;
+}
+.navbar .nav-link {
+  font-weight: 500;
+  color: #1f2937;
+  transition: color 0.2s ease;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: #15803d !important;
+}
+.navbar .btn-ppdb {
+  box-shadow: 0 4px 10px rgba(21, 128, 61, 0.25);
+  transition: all 0.3s ease;
+  background-color: #15803d;
+  border-color: #15803d;
+}
+.navbar .btn-ppdb:hover {
+  background-color: #166534 !important;
+  transform: translateY(-1px);
+}
+
+.hero-section {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(21, 128, 61, 0.92) 0%,
+      rgba(22, 101, 52, 0.88) 100%
+    ),
+    url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80")
+      no-repeat center center/cover;
+  min-height: 75vh;
+  padding: 100px 0 140px 0;
+}
+.hero-section .fw-extrabold {
+  font-weight: 800;
+}
+.hero-section .line-height-sm {
+  line-height: 1.2;
+}
+.hero-section .hero-image-card .floating-badge {
+  transform: translateX(-15px);
+  border-left: 4px solid #15803d;
+  min-width: 180px;
+}
+
+.stats-cards-wrapper {
+  margin-top: -80px;
+  margin-bottom: 40px;
+}
+.card-hover-top {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  border-radius: 12px;
+}
+.card-hover-top .feature-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+.card-hover-top:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+.section-padding {
+  padding-top: 70px !important;
+  padding-bottom: 70px !important;
+}
+.section-title-line {
+  position: relative;
+  padding-bottom: 12px;
+}
+.section-title-line::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: #f59e0b;
+  border-radius: 2px;
+}
+
+.card-hover-shadow {
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+.card-hover-shadow:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06) !important;
+}
+.card-img-top-height {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+.card-title-link {
+  transition: color 0.2s ease;
+}
+.card-title-link:hover {
+  color: #15803d !important;
+}
+
+footer {
+  background-color: #1f2937 !important;
+}
+footer .footer-links li a {
+  transition:
+    color 0.2s ease,
+    padding-left 0.2s ease;
+}
+footer .footer-links li a:hover {
+  color: #f59e0b !important;
+  padding-left: 4px;
+}
+
+@media (max-width: 991.98px) {
+  .hero-section {
+    padding: 60px 0 100px 0;
+  }
+  .stats-cards-wrapper {
+    margin-top: -50px;
+  }
+}
+@media (max-width: 575.98px) {
+  .navbar-brand .brand-title {
+    font-size: 0.95rem;
+  }
+  .navbar-brand .brand-subtitle {
+    font-size: 0.65rem;
+  }
+  .w-sm-auto {
+    width: auto !important;
+  }
+}

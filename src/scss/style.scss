@@ -1,0 +1,276 @@
+// ==========================================
+// CUSTOM VARIABLES & THEME OVERRIDES (SASS)
+// ==========================================
+
+// Color Palette
+$primary-color:    #15803d; // Hijau Islami Khas Madrasah
+$secondary-color:  #166534; // Hijau Gelap Accent
+$accent-color:     #f59e0b; // Kuning Emas Elegan
+$dark-color:       #1f2937; // Charcoal Dark
+$light-bg:         #f8fafc; // Off-white modern untuk section
+
+// Utility Soft Shades
+$primary-light:    rgba(21, 128, 61, 0.1);
+$success-light:    rgba(34, 197, 94, 0.1);
+$warning-light:    rgba(245, 158, 11, 0.1);
+
+// Typography Specifics
+$font-stack:       'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+// ==========================================
+// BASE STYLES
+// ==========================================
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-stack;
+  color: $dark-color;
+  overflow-x: hidden;
+  background-color: #ffffff;
+}
+
+// Global Classes Re-usable
+.bg-light {
+  background-color: $light-bg !important;
+}
+
+.max-w-600 {
+  max-width: 600px;
+}
+
+.letter-spacing {
+  letter-spacing: 1px;
+}
+
+.opacity-90 {
+  opacity: 0.90;
+}
+
+// Custom Colors Helper injection
+.bg-accent { background-color: $accent-color !important; }
+.btn-accent { 
+  background-color: $accent-color !important;
+  border-color: $accent-color !important;
+  color: $dark-color !important; // Memastikan teks tetap gelap transparan
+  transition: all 0.2s ease-in-out;
+
+  // Saat kursor berada di atas tombol (Hover)
+  &:hover {
+    background-color: darken($accent-color, 6%) !important;
+    border-color: darken($accent-color, 6%) !important;
+    transform: translateY(-2px); // Efek mengangkat sedikit yang modern
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+  }
+
+  // SAAT DIKLIK / DITEKAN (Active & Focus State)
+  &:active, &:focus, &.active {
+    background-color: darken($accent-color, 12%) !important; // Kuningnya menjadi sedikit lebih matang/gelap pas diklik
+    border-color: darken($accent-color, 12%) !important;
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.4) !important;
+  }
+}
+.text-accent { color: $accent-color !important; }
+
+.bg-primary-light { background-color: $primary-light !important; }
+.bg-success-light { background-color: $success-light !important; }
+.bg-warning-light { background-color: $warning-light !important; }
+
+// ==========================================
+// TOP BAR
+// ==========================================
+.top-bar {
+  background-color: $secondary-color;
+  a {
+    transition: opacity 0.2s ease;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+// ==========================================
+// NAVBAR & BRANDING Custom Logo Ready
+// ==========================================
+.navbar {
+  .logo-wrapper {
+    width: 45px;
+    height: 45px;
+    // Jika menggunakan gambar logo custom, atur pembungkus ini agar serasi.
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  
+  .brand-title {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    color: $primary-color;
+  }
+  
+  .brand-subtitle {
+    font-size: 0.72rem;
+  }
+
+  .nav-link {
+    font-weight: 500;
+    color: $dark-color;
+    transition: color 0.2s ease;
+    
+    &:hover, &.active {
+      color: $primary-color !important;
+    }
+  }
+
+  .btn-ppdb {
+    box-shadow: 0 4px 10px rgba(21, 128, 61, 0.25);
+    transition: all 0.3s ease;
+    background-color: $primary-color;
+    border-color: $primary-color;
+    &:hover {
+      background-color: $secondary-color !important;
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// ==========================================
+// HERO SECTION (PERBAIKAN TOTAL)
+// ==========================================
+.hero-section {
+  background: linear-gradient(135deg, rgba(21, 128, 61, 0.92) 0%, rgba(22, 101, 52, 0.88) 100%), 
+              url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+  min-height: 75vh;
+  // Ditambah padding-top 60px agar teks turun dan tidak bersembunyi di bawah navbar putih
+  padding: 120px 0 140px 0 !important; 
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+// ==========================================
+// HIGHLIGHT CARDS OVERLAP
+// ==========================================
+.stats-cards-wrapper {
+  // Dikurangi margin minusnya agar tidak menabrak tombol hero di atasnya
+  margin-top: -50px !important; 
+  margin-bottom: 50px;
+  position: relative;
+  z-index: 10;
+}
+
+// ==========================================
+// HIGHLIGHT CARDS OVERLAP
+// ==========================================
+.stats-cards-wrapper {
+  margin-top: -80px;
+  margin-bottom: 40px;
+}
+
+.card-hover-top {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  
+  .feature-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08) !important;
+  }
+}
+
+// ==========================================
+// SECTIONS STYLING
+// ==========================================
+.section-padding {
+  padding-top: 70px !important;
+  padding-bottom: 70px !important;
+}
+
+.section-title-line {
+  position: relative;
+  padding-bottom: 12px;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: $accent-color;
+    border-radius: 2px;
+  }
+}
+
+.card-hover-shadow {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06) !important;
+  }
+}
+
+.card-img-top-height {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+
+.card-title-link {
+  transition: color 0.2s ease;
+  &:hover {
+    color: $primary-color !important;
+  }
+}
+
+// ==========================================
+// FOOTER
+// ==========================================
+footer {
+  background-color: $dark-color !important;
+  
+  .footer-links {
+    li a {
+      transition: color 0.2s ease, padding-left 0.2s ease;
+      &:hover {
+        color: $accent-color !important;
+        padding-left: 4px;
+      }
+    }
+  }
+}
+
+// ==========================================
+// RESPONSIVE REFINEMENTS
+// ==========================================
+@media (max-width: 991.98px) {
+  .hero-section {
+    padding: 60px 0 100px 0;
+  }
+  .stats-cards-wrapper {
+    margin-top: -50px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .navbar-brand {
+    .brand-title { font-size: 0.95rem; }
+    .brand-subtitle { font-size: 0.65rem; }
+  }
+  .w-sm-auto {
+    width: auto !important;
+  }
+}
