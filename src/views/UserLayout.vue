@@ -18,9 +18,7 @@
             </div>
             <span class="fw-bold h5 mb-0 text-white">MI RAUDLATUL ULUM</span>
           </div>
-          <p class="text-white-50 small mb-4">
-            Lembaga pendidikan dasar Islam yang mengintegrasikan kecerdasan intelektual, emosional, dan kepatuhan spiritual berdasarkan manhaj Ahlussunnah wal Jama'ah.
-          </p>
+          
         </div>
 
         <div class="col-lg-2 col-md-6">
