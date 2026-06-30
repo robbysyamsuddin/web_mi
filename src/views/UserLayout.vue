@@ -40,9 +40,9 @@
               <i class="fas fa-map-marker-alt text-accent me-2 mt-1"></i> 
               <span>Jl Kasengan, Dusun Sumberkatimoho Krejengan Kode pos 67284</span>
             </li>
-            <li class="mb-2 d-flex">
+            <li class="mb-2 d-flex text-white-50">
               <i class="fas fa-phone-alt text-accent me-2 mt-1"></i> 
-              <span>(0335) 123456</span>
+              <span>belum tersedia</span>
             </li>
           </ul>
         </div>
