@@ -4,7 +4,7 @@
       <div class="row g-4 justify-content-center">
         
         <div class="col-md-4">
-          <div class="card border-0 shadow-sm p-4 text-center text-sm-start h-100 card-hover-top bg-white">
+          <div class="card border-0 shadow-sm p-4 text-center text-sm-start h-100 card-hover-top bg-success-light">
             <div class="d-sm-flex align-items-center">
               <div class="feature-icon bg-primary-light text-success p-3 rounded-3 me-3 mb-3 mb-sm-0">
                 <i class="fas fa-book-open fa-lg"></i>
