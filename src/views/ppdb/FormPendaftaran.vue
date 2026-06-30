@@ -146,7 +146,7 @@ import { reactive, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { supabase } from '../../supabase' // Pastikan jalurnya benar ke src/supabase.ts
 
-// 1. STATE UTAMA (Dideklarasikan SEKALI saja, tidak boleh dobel)
+// 1. STATE UTAMA
 const router = useRouter()
 const isLoading = ref<boolean>(false)
 const isSuccess = ref<boolean>(false)
@@ -161,7 +161,7 @@ const fileNameKtpIbu = ref<string>('')
 
 // State untuk Cek Koneksi Supabase
 const statusKoneksi = ref<string>('Sedang mengecek koneksi ke database...')
-const isConnected = ref<boolean | null>(null) // null = loading, true = aman, false = error
+const isConnected = ref<boolean | null>(null)
 
 // 2. KONTRAK DATA FORM (TypeScript Interface)
 interface FormPPDB {
@@ -187,11 +187,10 @@ const formInput = reactive<FormPPDB>({
   berkasKK: null, berkasAkta: null, berkasIjazahRA: null, berkasKtpAyah: null, berkasKtpIbu: null
 })
 
-// 3. FUNGSI CEK KONEKSI (Menjawab kebutuhan cek terhubung/tidak)
+// 3. FUNGSI CEK KONEKSI
 const cekJalurSupabase = async () => {
   try {
-    // Melakukan query select minimal untuk tes jalur pipa data
-    const { data, error } = await supabase.from('form_pendaftaran').select('*').limit(1)
+    const { error } = await supabase.from('form_pendaftaran').select('*').limit(1)
     
     if (error) {
       isConnected.value = false
@@ -200,25 +199,32 @@ const cekJalurSupabase = async () => {
     } else {
       isConnected.value = true
       statusKoneksi.value = 'Alhamdulillah, Vue & Supabase Berhasil Terkoneksi! Proyek Siap. 🎉'
-      console.log('✅ Jalur Koneksi Sukses:', data)
     }
   } catch (err: any) {
     isConnected.value = false
     statusKoneksi.value = `Gagal Terhubung: ${err.message || 'Periksa URL / Anon Key'}`
-    console.error('❌ Network Error:', err)
   }
 }
 
-// Jalankan tes koneksi otomatis begitu komponen halaman dimuat
 onMounted(() => {
   cekJalurSupabase()
 })
 
-// 4. HANDLER FILE UPLOAD LOKAL (Maksimal 2MB)
+// 4. HANDLER FILE UPLOAD (Diperketat Tipe & Ukuran Maksimal 2MB)
 const handleFileUpload = (event: Event, jenis: 'berkasKK' | 'berkasAkta' | 'berkasIjazahRA' | 'berkasKtpAyah' | 'berkasKtpIbu'): void => {
   const target = event.target as HTMLInputElement
   if (target.files && target.files[0]) {
     const file = target.files[0]
+    
+    // 🛡️ TAMBAHAN: Validasi Mime Type Asli File (Mencegah file .exe / .sh disamarkan jadi gambar)
+    const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg']
+    if (!allowedTypes.includes(file.type)) {
+      alert('Format berkas tidak diizinkan! Hanya boleh mengunggah berkas PDF atau Gambar (JPG/PNG).')
+      target.value = ''
+      return
+    }
+
+    // Validasi Ukuran (Maksimal 2 MB)
     if (file.size > 2 * 1024 * 1024) {
       alert('Ukuran berkas terlalu besar! Maksimal adalah 2 MB.')
       target.value = ''
@@ -236,8 +242,32 @@ const handleFileUpload = (event: Event, jenis: 'berkasKK' | 'berkasAkta' | 'berk
   }
 }
 
-// 5. FUNGSI SUBMIT UTAMA (Kirim ke DB & Storage)
+// 5. FUNGSI SUBMIT UTAMA (Kirim ke DB & Storage dengan Sanitisasi Input)
 const submitForm = async (): Promise<void> => {
+  // 🛡️ TAMBAHAN: Validasi Pola Karakter Angka untuk NISN dan NIK
+  const regexAngka = /^[0-9]+$/
+  if (!regexAngka.test(formInput.nisn)) {
+    alert('Format error: NISN wajib diisi dan hanya boleh berisi angka!')
+    return
+  }
+  if (!regexAngka.test(formInput.nikSiswa)) {
+    alert('Format error: NIK Siswa wajib diisi dan hanya boleh berisi angka!')
+    return
+  }
+
+  // 🛡️ TAMBAHAN: Sanitisasi Input Teks dari Potensi Skrip HTML Malicious (XSS Injection)
+  const bersihkanTeks = (teks: string) => teks.replace(/<\/?[^>]+(>|$)/g, "").trim()
+
+  formInput.namaSiswa = bersihkanTeks(formInput.namaSiswa)
+  formInput.tempatLahir = bersihkanTeks(formInput.tempatLahir)
+  formInput.namaAyah = bersihkanTeks(formInput.namaAyah)
+  formInput.namaIbu = bersihkanTeks(formInput.namaIbu)
+
+  if (!formInput.namaSiswa || !formInput.namaAyah || !formInput.namaIbu) {
+    alert('Harap isi data teks dengan benar tanpa karakter ilegal!')
+    return
+  }
+
   isLoading.value = true
   try {
     const uniqueId = Date.now()
@@ -249,7 +279,7 @@ const submitForm = async (): Promise<void> => {
       const filePath = `${uniqueId}_${folderName}.${fileExt}`
       
       const { error } = await supabase.storage
-        .from('berkas_pendaftaran') // Nama bucket storage Anda
+        .from('berkas_pendaftaran') // Pastikan nama bucket di Supabase Anda sama persis
         .upload(filePath, file)
         
       if (error) throw error
@@ -263,7 +293,7 @@ const submitForm = async (): Promise<void> => {
     const urlKtpAyah = await uploadBerkas(formInput.berkasKtpAyah, 'ktp_ayah')
     const urlKtpIbu = await uploadBerkas(formInput.berkasKtpIbu, 'ktp_ibu')
 
-    // Simpan ke tabel relasional 'pendaftaran' Supabase
+    // Simpan ke tabel relasional 'form_pendaftaran' Supabase
     const { error: dbError } = await supabase
       .from('form_pendaftaran')
       .insert([
