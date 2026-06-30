@@ -3,8 +3,8 @@
     <!-- Header Halaman -->
     <div class="text-center mb-5">
       <span class="badge bg-primary rounded-pill px-3 py-2 text-uppercase fw-bold mb-2">Tahun Ajaran 2025/2026</span>
-      <h2 class="fw-bold text-dark">Informasi Kelulusan & Pengumuman SKL</h2>
-      <p class="text-muted mx-auto" style="max-width: 650px;">
+      <h2 class="fw-bold text-white">Informasi Kelulusan & Pengumuman SKL</h2>
+      <p class="text-white mx-auto" style="max-width: 650px;">
         Selamat kepada seluruh santri kelas VI MI Raudlatul Ulum yang telah menyelesaikan rangkaian Ujian Nasional, Ujian TKA, dan Tahfidz. Silakan unduh SKL resmi melalui tombol yang tersedia.
       </p>
     </div>
@@ -83,36 +83,76 @@ const searchQuery = ref('')
 
 const dataLulus = ref([
   {
-    nisn: '0123456781',
-    nama: 'Ahmad Zaki Mubarok',
-    nilaiUn: 'A (Sangat Baik)',
-    nilaiTka: 'Mumtaz',
-    tahfidz: '3',
-    linkGoogleDrive: 'https://drive.google.com/file/d/ID_FILE_SKL_Drive_1/view?usp=sharing'
-  },
-  {
-    nisn: '0123456782',
-    nama: 'Siti Fatimah Az-Zahra',
-    nilaiUn: 'A (Sangat Baik)',
-    nilaiTka: 'Mumtaz',
-    tahfidz: '5',
-    linkGoogleDrive: 'https://drive.google.com/file/d/ID_FILE_SKL_Drive_2/view?usp=sharing'
-  },
-  {
-    nisn: '0123456783',
-    nama: 'Muhammad Rizky Pratama',
+    nisn: '-',
+    nama: 'Adelia Titis Prameswari',
     nilaiUn: 'B (Baik)',
-    nilaiTka: 'Jayyid Jiddan',
-    tahfidz: '2',
-    linkGoogleDrive: 'https://drive.google.com/file/d/ID_FILE_SKL_Drive_3/view?usp=sharing'
+    nilaiTka: '-',
+    tahfidz: '-',
+    linkGoogleDrive: 'https://drive.google.com/file/d/10MnE2X-s80zUrHEOJzr57n3v7H6VWv4X/view?usp=sharing'
   },
   {
-    nisn: '0123456784',
-    nama: 'Lailatul Qomariyah',
-    nilaiUn: 'A (Sangat Baik)',
-    nilaiTka: 'Mumtaz',
-    tahfidz: '4',
-    linkGoogleDrive: 'https://drive.google.com/file/d/ID_FILE_SKL_Drive_4/view?usp=sharing'
+    nisn: '-',
+    nama: 'Amiratul Hasanah',
+    nilaiUn: 'B (Baik)',
+    nilaiTka: '-',
+    tahfidz: '-',
+    linkGoogleDrive: 'https://drive.google.com/file/d/1m6IEP6qzQ1rR8pWfzHXn4I5h1-JEbTfV/view?usp=sharing'
+  },
+  {
+    nisn: '-',
+    nama: 'Angga Dwi Cahyo',
+    nilaiUn: 'B (Baik)',
+    nilaiTka: '-',
+    tahfidz: '-',
+    linkGoogleDrive: 'https://drive.google.com/file/d/1PiFSaAtdGZ2o0G2h0Y5nA9VWv8jKEdPZ/view?usp=sharing'
+  },
+  {
+    nisn: '-',
+    nama: 'Ayu Malinda Bulgis',
+    nilaiUn: 'B (Baik)',
+    nilaiTka: '-',
+    tahfidz: '-',
+    linkGoogleDrive: 'https://drive.google.com/file/d/1LLu4COE6alts5-Sdh-3e_0lkGbsL9dJA/view?usp=sharing'
+  },
+  {
+    nisn: '-',
+    nama: 'Dzurrotun Nasyihah',
+    nilaiUn: 'B (Baik)',
+    nilaiTka: '-',
+    tahfidz: '-',
+    linkGoogleDrive: 'https://drive.google.com/file/d/1cVW4vFEvOTBllUkWaG1lCzo-DciMBCUv/view?usp=sharing'
+  },
+  {
+    nisn: '-',
+    nama: 'Feli Anggun Fransiska',
+    nilaiUn: 'B (Baik)',
+    nilaiTka: '-',
+    tahfidz: '-',
+    linkGoogleDrive: 'https://drive.google.com/file/d/1lTK95iu0c7qlcJYgsKwHypxSXAC-UZsS/view?usp=sharing'
+  },
+  {
+    nisn: '-',
+    nama: 'Moh. Affandi Ramadhani',
+    nilaiUn: 'B (Baik)',
+    nilaiTka: '-',
+    tahfidz: '-',
+    linkGoogleDrive: 'https://drive.google.com/file/d/1NttdowEVJaX4OV8-zDC7LZRWaDSnuvf4/view?usp=sharing'
+  },
+  {
+    nisn: '-',
+    nama: 'Nur Aminatul Ijabah',
+    nilaiUn: 'B (Baik)',
+    nilaiTka: '-',
+    tahfidz: '-',
+    linkGoogleDrive: 'https://drive.google.com/file/d/1YTf2R1Xbzm89f4VE8nZAlCpImOE6-lzc/view?usp=sharing'
+  },
+  {
+    nisn: '-',
+    nama: 'Putri Widari',
+    nilaiUn: 'B (Baik)',
+    nilaiTka: '-',
+    tahfidz: '-',
+    linkGoogleDrive: 'https://drive.google.com/file/d/13Q8DKMRT-GK33FbRFACuysVFPQljQ3LA/view?usp=sharing'
   }
 ])
 

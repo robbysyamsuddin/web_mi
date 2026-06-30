@@ -1,107 +1,105 @@
-<!-- Komponen CetakSiswaPdf.vue -->
 <template>
-  <div class="print-container p-5 bg-white text-dark">
-    
-    <!-- 1. KOP SURAT RESMI MADRASAH -->
-    <div class="d-flex align-items-center justify-content-center border-bottom border-3 border-dark pb-3 mb-4">
-      <img src="@/assets/ma.png" style="height: 80px; width: auto;" class="me-3" alt="Logo MI">
-      <div class="text-center">
-        <h4 class="fw-bold text-uppercase mb-0" style="letter-spacing: 1px;">Yayasan Pendidikan Islam Raudlatul Ulum</h4>
-        <h3 class="fw-extrabold text-uppercase mb-1" style="font-family: 'Times New Roman', Times, serif;">MADRASAH IBTIDAIYAH RAUDLATUL ULUM</h3>
-        <p class="mb-0 small text-muted">Jl. Raya KH. Khasyim, Dusun Sumberkatimoho, Krejengan, Probolinggo | Telp: (0335) 123456</p>
+  <div class="p-4">
+    <div class="mb-4">
+      <h4 class="fw-bold mb-1">Data Pendaftar PPDB (Santri Baru)</h4>
+      <p class="text-muted small mb-0">Halaman kontrol untuk memverifikasi berkas dan biodata calon santri MI Raudlatul Ulum.</p>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-3 overflow-hidden bg-white">
+      <div class="p-3 bg-dark text-white fw-bold d-flex justify-content-between align-items-center">
+        <span>Daftar Calon Santri Baru</span>
+        <span class="badge bg-primary rounded-pill">Mode Dummy Testing</span>
+      </div>
+      
+      <div class="table-responsive">
+        <table class="table align-middle mb-0 table-hover">
+          <thead class="table-light text-nowrap">
+            <tr>
+              <th>No</th>
+              <th>Nama Lengkap</th>
+              <th>NISN</th>
+              <th>TTL</th>
+              <th>Orang Tua (Ayah/Ibu)</th>
+              <th>No. WhatsApp</th>
+              <th class="text-center">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in listPendaftarDummy" :key="item.id">
+              <td class="fw-bold text-muted">{{ index + 1 }}</td>
+              <td class="fw-bold text-dark">{{ item.nama_lengkap }}</td>
+              <td><code class="text-dark">{{ item.nisn }}</code></td>
+              <td>{{ item.tempat_lahir }}, {{ item.tanggal_lahir }}</td>
+              <td>
+                <small class="d-block text-dark">👨 {{ item.nama_ayah }}</small>
+                <small class="d-block text-muted">👩 {{ item.nama_ibu }}</small>
+              </td>
+              <td>
+                <a :href="'https://wa.me/' + item.nomor_whatsapp" target="_blank" class="btn btn-sm btn-light border text-success fw-bold">
+                  <i class="fab fa-whatsapp me-1"></i>{{ item.nomor_whatsapp }}
+                </a>
+              </td>
+              <td class="text-center text-nowrap">
+                <button class="btn btn-sm btn-outline-primary rounded-pill px-3 me-1" @click="cekDetail(item)">
+                  Detail
+                </button>
+                <button class="btn btn-sm btn-danger rounded-pill px-3" @click="hapusDummy(item.id)">
+                  Hapus
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-
-    <!-- 2. JUDUL DOKUMEN -->
-    <div class="text-center mb-4">
-      <h5 class="fw-bold text-uppercase text-decoration-underline">KARTU BUKTI PENDAFTARAN SPMB ONLINE</h5>
-      <p class="small">Nomor Pendaftaran: PPDB/2026/00{{ siswa.id }}</p>
-    </div>
-
-    <!-- 3. ISI DATA DARI DATABASE -->
-    <table class="table table-bordered border-dark custom-table mb-5">
-      <tr>
-        <td width="30%" class="fw-bold bg-light">Nama Calon Siswa</td>
-        <td>{{ siswa.nama_lengkap }}</td>
-      </tr>
-      <tr>
-        <td class="fw-bold bg-light">NISN / NIK</td>
-        <td>{{ siswa.nisn }}</td>
-      </tr>
-      <tr>
-        <td class="fw-bold bg-light">Tempat, Tanggal Lahir</td>
-        <td>{{ siswa.tempat_lahir }}, {{ siswa.tanggal_lahir }}</td>
-      </tr>
-      <tr>
-        <td class="fw-bold bg-light">Nama Ayah / Ibu Kandung</td>
-        <td>{{ siswa.nama_wali }}</td>
-      </tr>
-      <tr>
-        <td class="fw-bold bg-light">Asal Sekolah TK/RA</td>
-        <td>{{ siswa.asal_sekolah }}</td>
-      </tr>
-    </table>
-
-    <!-- 4. KOLOM TANDA TANGAN (TTD KANAN BAWAH) -->
-    <div class="row mt-5 pt-4">
-      <div class="col-7"></div>
-      <div class="col-5 text-center">
-        <p class="mb-1">Probolinggo, {{ tanggalHariIni }}</p>
-        <p class="fw-bold mb-5">Panitia PPDB MI Raudlatul Ulum,</p>
-        <br><br>
-        <p class="fw-bold text-decoration-underline mb-0">H. KUSNAIDI, S.Pd.I</p>
-        <p class="small text-muted mb-0">NIP. 19820311XXXXXXXXXX</p>
-      </div>
-    </div>
-
-    <!-- Tombol Aksi (Otomatis Hilang Saat Dicetak Jadi PDF) -->
-    <div class="text-center mt-5 no-print">
-      <button class="btn btn-danger btn-lg rounded-pill px-5 shadow" @click="eksekusiCetak">
-        <i class="fas fa-print me-2"></i> Cetak Dokumen PDF Resmi
-      </button>
-    </div>
-
   </div>
 </template>
 
-<script setup lang="typescript">
-import { ref, onMounted } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-const siswa = ref({
-  id: 1,
-  nama_lengkap: 'Muhammad Fatih Al-Ayyubi',
-  nisn: '3124556122',
-  tempat_lahir: 'Probolinggo',
-  tanggal_lahir: '12 Agustus 2019',
-  nama_wali: 'Supriyadi',
-  asal_sekolah: 'RA Perwanida 1 Krejengan'
-})
+// Data Dummy Terstruktur (Menghindari Error Missing Export saat Build)
+const listPendaftarDummy = ref([
+  {
+    id: 1,
+    nama_lengkap: 'Muhammad Raihan',
+    nisn: '0123456789',
+    tempat_lahir: 'Surabaya',
+    tanggal_lahir: '12-10-2019',
+    jenis_kelamin: 'Laki-laki',
+    nama_ayah: 'Ahmad Muzakki',
+    nama_ibu: 'Siti Aminah',
+    nomor_whatsapp: '081234567890',
+    alamat_lengkap: 'Jl. Raya Kenjeran No. 45, Surabaya'
+  },
+  {
+    id: 2,
+    nama_lengkap: 'Aisyah Humaira',
+    nisn: '0198765432',
+    tempat_lahir: 'Sidoarjo',
+    tanggal_lahir: '25-02-2020',
+    jenis_kelamin: 'Perempuan',
+    nama_ayah: 'Budi Santoso',
+    nama_ibu: 'Lailatul Qodriyah',
+    nomor_whatsapp: '085712345678',
+    alamat_lengkap: 'Perum Asri Blok C-12, Candi, Sidoarjo'
+  }
+])
 
-const tanggalHariIni = ref(new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }))
+const cekDetail = (item: any) => {
+  alert(`Detail Santri:\nNama: ${item.nama_lengkap}\nAlamat: ${item.alamat_lengkap}`)
+}
 
-const eksekusiCetak = () => {
-  window.print() // Memanggil engine printer/PDF bawaan OS komputer
+const hapusDummy = (id: number) => {
+  if (confirm('Hapus data dummy ini?')) {
+    listPendaftarDummy.value = listPendaftarDummy.value.filter(p => p.id !== id)
+  }
 }
 </script>
 
 <style scoped>
-/* 🌟 TRIK CSS MEDIA PRINT: MENYEMBUNYIKAN NAVBAR & FOOTER SAAT JADI PDF */
-@media print {
-  /* Hilangkan seluruh komponen luar seperti Navbar, Footer, dan Tombol Cetak */
-  .no-print, navbar, footer, .navbar, .btn {
-    display: none !important;
-  }
-  
-  /* Atur agar kertas PDF bersih tanpa margin bawaan browser */
-  body, .print-container {
-    margin: 0 !important;
-    padding: 0 !important;
-    background-color: #fff !important;
-  }
-  
-  .custom-table th, .custom-table td {
-    padding: 10px !important;
-    font-size: 14px;
-  }
+.table th {
+  font-weight: 600;
+  font-size: 14px;
 }
 </style>
