@@ -13,7 +13,7 @@
           Membentuk Generasi Qur'ani, Cerdas, dan Berteknologi
         </h1>
         <p class="lead mb-4 opacity-90 text-white">
-         MI Raudlatul Ulum memadukan pendidikan formal berbasis kurikulum nasional dengan nilai-nilai kepesantrenan dan iptek modern.
+          Selamat datang di MI Raudlatul Ulum, tempat di mana pendidikan berkualitas bertemu dengan nilai-nilai Islami. Bergabunglah dengan kami untuk membentuk masa depan yang gemilang bagi anak-anak Anda.
         </p>
         <div class="d-sm-flex justify-content-center justify-content-lg-start gap-3">
           <router-link to="/ppdb" class="btn btn-accent text-dark fw-bold rounded-pill px-4 py-3 mb-2 mb-sm-0 shadow w-100 w-sm-auto d-inline-flex align-items-center justify-content-center tombol-daftar">
